@@ -33,7 +33,7 @@
     "migrate": "npx knex --knexfile knexconfig.js migrate:latest",
     "rollback": "npx knex --knexfile knexconfig.js migrate:rollback",
     "makeSeed": "npx knex --knexfile knexconfig.js seed:make",
-    "runSeed": "npx knex --knexfile knexconfig.js seed:run"
+    "seed": "npx knex --knexfile knexconfig.js seed:run"
   },
   "proxy": "http://localhost:3000",
   "eslintConfig": {

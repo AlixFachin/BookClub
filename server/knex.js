@@ -10,10 +10,28 @@ Model.knex(db);
 class Book extends Model {
   static get tableName() {
     return 'books';
-  }
+  };
   static get idColumn() {
     return 'id';
-  }
+  };
+
+  static get relationMappings() {
+    return {
+      owners: {
+        relation: Model.ManyToManyRelation,
+        modelClass: User,
+        join: {
+          from: 'books.id',
+          through: {
+            // users_books is the join table
+            from: 'users_books.bookId',
+            to: 'users_books.userId',
+          },
+          to: 'users.id',
+        },
+      },
+    };
+  };
 }
 class User extends Model {
   static get tableName() {
@@ -21,6 +39,24 @@ class User extends Model {
   }
   static get idColumn() {
     return 'id';
+  }
+
+  static get relationMappings() {
+    return {
+      inventory: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Book,
+        join: {
+          from: 'users.id',
+          through: {
+            // users_books is the join table
+            from: 'users_books.userId',
+            to: 'users_books.bookId',
+          },
+          to: 'books.id',
+        },
+      },
+    };
   }
 }
 
@@ -36,8 +72,5 @@ module.exports = {
   getOneUser: (userId) =>{
     return User.query().findById(userId);
   },
-  addOneBook: (bookId, data) => {
-    return Book.query().
-  }
 
 };

@@ -17,7 +17,7 @@ exports.up = function(knex) {
           t.string('nickName').notNull();
           t.string('area').notNull();
         }),
-    knex.schema.createTable('inventory',
+    knex.schema.createTable('users_books',
         function(t) {
           t.increments('id').unsigned().primary();
           t.integer('userId').unsigned().references('id').inTable('users');
@@ -29,7 +29,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return Promise.all([
-    knex.schema.dropTableIfExists('inventory'),
+    knex.schema.dropTableIfExists('users_books'),
     knex.schema.dropTableIfExists('books'),
     knex.schema.dropTableIfExists('users'),
   ]);
