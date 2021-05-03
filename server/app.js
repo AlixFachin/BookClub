@@ -7,6 +7,8 @@ const morgan = require('morgan');
 
 const app = express();
 
+const dbUtils = require('./knex.js');
+
 // Setup morgan logger
 app.use(
     morgan(
@@ -20,18 +22,35 @@ app.use(
 const typeDefs = gql`
   type Query {
     allBooks: [Book]
+    singleBook(bookId: Int!): Book
+    singleUser(userId: Int!): User
   }
 
   type Book {
+    id: Int
     author: String
     title: String
+    language: String
+    genre: String
+  }
+
+  type User {
+    id:Int
+    nickName: String
+    area: String 
   }
 `;
 
 const resolvers = {
   Query: {
     allBooks: (_, args) => {
-      return undefined;
+      return dbUtils.getAllBooks();
+    },
+    singleBook: (_, args) => {
+      return dbUtils.getOneBook(args.bookId);
+    },
+    singleUser: (_, args) => {
+      return dbUtils.getOneUser(args.userId);
     },
   },
 };
