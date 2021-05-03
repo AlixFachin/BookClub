@@ -27,8 +27,8 @@
     "test-client": "react-scripts test",
     "eject": "react-scripts eject",
     "hack-server": "nodemon server",
-    "makeMigration": "npx knex --knexfile server/knexconfig.js migrate:make",
-    "migrate": "npx knex --knexfile server/knexconfig.js migrate:latest"
+    "makeMigration": "npx knex --knexfile knexconfig.js migrate:make",
+    "migrate": "npx knex --knexfile knexconfig.js migrate:latest"
   },
   "proxy": "http://localhost:3000",
   "eslintConfig": {
@@ -48,5 +48,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.23.2"
   }
 }
