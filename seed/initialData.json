@@ -1,0 +1,54 @@
+{
+  "books": [
+    {
+      "title":"Grapes of wrath",
+      "author":"John Steinbeck",
+      "genre":"Drama",
+      "language":"en"
+    },
+    {
+      "title":"The Biggest Bluff",
+      "author":"Maria Konnikova",
+      "genre":"Real Story",
+      "language":"en"
+    },
+    {
+      "title":"The Memory Police",
+      "author":"Yoko Ogawa",
+      "genre":"Fiction",
+      "language":"en"
+    },
+    {
+      "title":"God is not Great",
+      "author":"Christopher Hitchens",
+      "genre":"Essay",
+      "language":"en"
+    },
+    {
+      "title":"Reality is not what it seems",
+      "author":"Carlo Rovelli",
+      "genre":"Science",
+      "language":"en"
+    }
+  ],
+  "users": [
+    {
+      "fullName":"Miyamoto Musashi",
+      "nickName":"Swordman",
+      "area":"Tokyo"
+    },
+    {
+      "fullName":"Clark Kent",
+      "nickName":"Superman",
+      "area":"Tokyo"
+    },
+    {
+      "fullName":"Peter Parker",
+      "nickName":"Spidey",
+      "area":"Hokkaido"
+    }
+  ],
+  "inventory": [
+    
+  ]
+}
