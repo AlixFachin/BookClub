@@ -22,8 +22,19 @@ app.use(
 const typeDefs = gql`
   type Query {
     allBooks: [Book]
+    allUsers: [User] # temporary for debugging
     singleBook(bookId: Int!): Book
     singleUser(userId: Int!): User
+    bookInventory(userId: Int!): [Book]
+    bookOwners(bookId: Int!): [User]
+  }
+
+  type Mutation {
+    createBook(bookData: InputBook): Book
+    deleteBook(bookId: Int!): Int
+    createUser(userData: InputUser): User
+    deleteUser(userId: Int!): Int
+    addToInventory(userId: Int!, bookId: Int!, status: String!): User_Book
   }
 
   type Book {
@@ -34,11 +45,32 @@ const typeDefs = gql`
     genre: String
   }
 
+  input InputBook {
+    author: String!
+    title: String!
+    language: String!
+    genre: String
+  }
+
   type User {
     id:Int
-    nickName: String
+    nickName: String!
+    fullName: String!
     area: String 
   }
+
+  input InputUser {
+    nickName: String!
+    fullName: String!
+    area: String 
+  }
+
+  type User_Book {
+    bookId: Int!
+    userId: Int!
+    status: String!
+  }
+
 `;
 
 const resolvers = {
@@ -52,6 +84,33 @@ const resolvers = {
     singleUser: (_, args) => {
       return dbUtils.getOneUser(args.userId);
     },
+    allUsers: (_, args) => {
+      return dbUtils.getAllUsers();
+    },
+    bookInventory: (_, args) => {
+      return dbUtils.getBooksOwnedByUser(args.userId);
+    },
+    bookOwners: (_, args) => {
+      return dbUtils.getOwnersOfBook(args.bookId);
+    },
+  },
+  Mutation: {
+    createBook: async (_, args) => {
+      return dbUtils.createOneBook(args.bookData);
+    },
+    deleteBook: async (_, args) => {
+      return dbUtils.deleteOneBook(args.bookId);
+    },
+    createUser: async (_, args) => {
+      return dbUtils.createOneUser(args.userData);
+    },
+    deleteUser: async (_, args) => {
+      return dbUtils.deleteOneUser(args.userId);
+    },
+    addToInventory: async (_, args) => {
+      return dbUtils.addToInventory(args.userId, args.bookId, args.status);
+    },
+
   },
 };
 

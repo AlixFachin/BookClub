@@ -72,5 +72,31 @@ module.exports = {
   getOneUser: (userId) =>{
     return User.query().findById(userId);
   },
-
+  getAllUsers: () => {
+    return User.query();
+  },
+  getBooksOwnedByUser: (userId) => {
+    return User.relatedQuery('inventory').for(userId);
+  },
+  getOwnersOfBook: (bookId) => {
+    return Book.relatedQuery('owners').for(bookId);
+  },
+  createOneBook: (bookData) => {
+    return Book.query().insert(bookData);
+  },
+  deleteOneBook: (bookId) => {
+    return Book.query().deleteById(bookId);
+  },
+  createOneUser: (userData) => {
+    return User.query().insert(userData);
+  },
+  deleteOneUser: (userId) => {
+    return User.query().deleteById(userId);
+  },
+  addToInventory: (userId, bookId, status) => {
+    return db('users_books').insert({userId: userId, bookId: bookId, status: status}, ['*'])
+        .then((data) => {
+          return data[0];
+        });
+  },
 };
