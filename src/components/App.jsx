@@ -35,7 +35,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Welcome to the Book Club! <AuthenticationButton />
+        <p>Welcome to the Book Club!</p> 
+        <div className="authBox"> <AuthenticationButton /> </div>
       </header>
       <main>
         <UserComponent userList={userList} selectUser={selectUserId}/>

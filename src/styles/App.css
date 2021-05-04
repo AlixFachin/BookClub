@@ -11,36 +11,51 @@ html {
 .App {
   text-align: center;
   font-family: "Roboto", sans-serif;
-  
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
 }
 
 .App-header {
   background-color: #282c34;
   min-height: 3em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  width:100%;
+}
+
+.authBox {
+  align-self: center;
+  justify-self: flex-end;
 }
 
 .App-link {
   color: #61dafb;
 }
 
+main {
+  width:90%;
+}
+
 .panel {
-  background-color: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width:100%;
 }
 
 .miniPanel {
-  background-color: white;
   margin-right: 10px;
   margin-left: 10px;
+  padding: 10px;
 }
