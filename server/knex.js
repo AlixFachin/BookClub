@@ -76,7 +76,7 @@ module.exports = {
     return User.query();
   },
   getBooksOwnedByUser: (userId) => {
-    return User.relatedQuery('inventory').for(userId);
+    return User.relatedQuery('inventory').for(userId).distinct('bookId');
   },
   getOwnersOfBook: (bookId) => {
     return Book.relatedQuery('owners').for(bookId);

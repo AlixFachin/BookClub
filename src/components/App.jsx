@@ -3,10 +3,12 @@ import '../styles/App.css';
 
 // Components
 import UserComponent from './UserComponent';
+import BookInventory from './BookInventory';
 
 function App() {
   const [userList, setUserList] = useState([]);
-
+  const [selectedUserId, selectUserId] = useState(-1);
+  // hook on initial render -> download the list of users
   useEffect(() => {
     async function getUserList() {
       const userList = await fetch('/graphql', {
@@ -35,7 +37,8 @@ function App() {
         Welcome to the Book Club
       </header>
       <main>
-        <UserComponent userList={userList}/>
+        <UserComponent userList={userList} selectUser={selectUserId}/>
+        <BookInventory userId={selectedUserId} />
       </main>
     </div>
   );
