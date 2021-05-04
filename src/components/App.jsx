@@ -8,7 +8,6 @@ import BookInventory from './BookInventory';
 import AuthHeader from './authHeader';
 
 function App() {
-  const [userList, setUserList] = useState([]);
   const [selectedUserId, selectUserId] = useState(-1);
 
   const {user, isAuthenticated, isLoading} = useAuth0();
@@ -65,34 +64,11 @@ function App() {
     }
   }, [isAuthenticated, user, isLoading]);
 
-  // hook on initial render -> download the list of users
-  useEffect(() => {
-    async function getUserList() {
-      const userList = await fetch('/graphql', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          query: `{ 
-            allUsers {
-              id
-              fullName
-              nickName
-            }
-          }`}),
-      }).then((data) => data.json())
-          .then((dataObj) => {
-            return dataObj.data.allUsers;
-          });
-      setUserList(userList);
-    }
-    getUserList();
-  }, []);
-
   return (
     <div className="App">
-      <AuthHeader selectUser={selectUserId}/>
+      <AuthHeader/>
       <main>
-        <UserComponent userList={userList} selectUser={selectUserId}/>
+        <UserComponent user={user}/>
         <BookInventory userId={selectedUserId} />
       </main>
     </div>
