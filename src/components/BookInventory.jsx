@@ -31,7 +31,7 @@ function BookInventory(props) {
   }, [props.userId]);
   return (
     <div className="panel bookInventory">
-      <p> Book Inventory: </p>
+      <p> Book Inventory </p>
       { bookInventory.map((book, index) => {
         return (<BookBox key={`book-${book.id}-${index}`} book={book} /> );
       })}

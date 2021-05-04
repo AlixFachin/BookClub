@@ -13,9 +13,11 @@ exports.up = function(knex) {
     knex.schema.createTable('users',
         function(t) {
           t.increments('id').unsigned().primary();
+          t.string('authId').notNull();
           t.string('fullName').notNull();
           t.string('nickName').notNull();
-          t.string('area').notNull();
+          t.string('email');
+          t.string('area');
         }),
     knex.schema.createTable('users_books',
         function(t) {

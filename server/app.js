@@ -25,6 +25,7 @@ const typeDefs = gql`
     allUsers: [User] # temporary for debugging
     singleBook(bookId: Int!): Book
     singleUser(userId: Int!): User
+    userByAuthId(authId: String!): User
     bookInventory(userId: Int!): [Book]
     bookOwners(bookId: Int!): [User]
   }
@@ -56,12 +57,15 @@ const typeDefs = gql`
     id:Int
     nickName: String!
     fullName: String!
-    area: String 
+    authId: String!
+    area: String
   }
 
   input InputUser {
     nickName: String!
     fullName: String!
+    authId: String!
+    email: String
     area: String 
   }
 
@@ -83,6 +87,9 @@ const resolvers = {
     },
     singleUser: (_, args) => {
       return dbUtils.getOneUser(args.userId);
+    },
+    userByAuthId: (_, args) => {
+      return dbUtils.getUserByAuthId(args.authId);
     },
     allUsers: (_, args) => {
       return dbUtils.getAllUsers();

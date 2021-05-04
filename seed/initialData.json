@@ -33,16 +33,19 @@
   ],
   "users": [
     {
+      "authId":"alix|12345",
       "fullName":"Miyamoto Musashi",
       "nickName":"Swordman",
       "area":"Tokyo"
     },
     {
+      "authId":"alix|67890",
       "fullName":"Clark Kent",
       "nickName":"Superman",
       "area":"Tokyo"
     },
     {
+      "authId":"alix|ABCDEF",
       "fullName":"Peter Parker",
       "nickName":"Spidey",
       "area":"Hokkaido"

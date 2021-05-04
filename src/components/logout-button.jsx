@@ -6,7 +6,7 @@ const LogoutButton = () => {
   return (
     <button className="authButton" onClick={() =>
       logout({returnTo: window.location.origin})}>
-    Log in</button>
+    Log out</button>
   );
 };
 
