@@ -4,6 +4,7 @@ import '../styles/App.css';
 // Components
 import UserComponent from './UserComponent';
 import BookInventory from './BookInventory';
+import AuthenticationButton from './authentication-button';
 
 function App() {
   const [userList, setUserList] = useState([]);
@@ -34,7 +35,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Welcome to the Book Club
+        Welcome to the Book Club! <AuthenticationButton />
       </header>
       <main>
         <UserComponent userList={userList} selectUser={selectUserId}/>

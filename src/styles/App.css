@@ -1,7 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Contrail+One&family=Roboto&display=swap");
+
+html {
+    box-sizing: border-box;
+    background: #348F50;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #56B4D3, #348F50);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #56B4D3, #348F50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: 100vh;
+}
+
 .App {
   text-align: center;
-  background-color: lightgray;
-  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  
 }
 
 .App-header {

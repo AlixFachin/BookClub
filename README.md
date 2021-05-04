@@ -26,6 +26,8 @@ Please access the deployed version at the following address:
 # Installation
 
 # Tech Used
+* User authentication is done with <https://auth0.com/blog/complete-guide-to-react-user-authentication/>
+
 
 ## Front-end
 
