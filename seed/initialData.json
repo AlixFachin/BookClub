@@ -29,6 +29,36 @@
       "author":"Carlo Rovelli",
       "genre":"Science",
       "language":"en"
+    },
+    {
+      "title":"Grotesque",
+      "author":"Natsuo Kirino",
+      "genre":"Crime Fiction",
+      "language":"en"
+    },
+    {
+      "title":"The Golden Pavillion",
+      "author":"Yukio Mishima",
+      "genre":"Fiction",
+      "language":"en"
+    },
+    {
+      "title":"Crime and Punishment",
+      "author":"Fiodor Dostoievski",
+      "genre":"Fiction",
+      "language":"en"
+    },
+    {
+      "title":"Breasts and Eggs",
+      "author":"Mieko Kawakami",
+      "genre":"Fiction",
+      "language":"en"
+    },
+    {
+      "title":"Becoming",
+      "author":"Michelle Obama",
+      "genre":"Autobiography",
+      "language":"en"
     }
   ],
   "users": [

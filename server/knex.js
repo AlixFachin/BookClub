@@ -73,6 +73,7 @@ module.exports = {
     return User.query().findById(userId);
   },
   getUserByAuthId: (authId) => {
+    console.log(`In the getUserByAuth ${authId}`);
     return User.query().where('authId', authId);
   },
   getAllUsers: () => {

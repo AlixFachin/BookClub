@@ -18,7 +18,7 @@ exports.up = function(knex) {
           t.string('nickName').notNull();
           t.string('email');
           t.string('area');
-        }),
+        }).then(()=> knex.schema.alterTable('users', (t) => t.unique('authId'))),
     knex.schema.createTable('users_books',
         function(t) {
           t.increments('id').unsigned().primary();

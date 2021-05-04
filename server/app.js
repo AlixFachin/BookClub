@@ -25,7 +25,7 @@ const typeDefs = gql`
     allUsers: [User] # temporary for debugging
     singleBook(bookId: Int!): Book
     singleUser(userId: Int!): User
-    userByAuthId(authId: String!): User
+    userByAuthId(authId: String!): [User]
     bookInventory(userId: Int!): [Book]
     bookOwners(bookId: Int!): [User]
   }

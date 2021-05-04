@@ -28,7 +28,7 @@ function App() {
       }).then((data) => data.json())
           .then((jsonData) => {
             console.log(`Reply from the new query: ${JSON.stringify(jsonData)}`);
-            if (jsonData.data.userByAuthId.id === null) {
+            if (jsonData.data.userByAuthId.length === 0) {
               // USER NOT DEFINED -> WE NEED TO CREATE A NEW ONE
               console.log(`Authenticated user = ${JSON.stringify(user)}`);
               fetch('/graphql', {
@@ -57,8 +57,9 @@ function App() {
                   });
             } else {
               // The authenticated user exists in the database. We need to update internal state
-              selectUserId(Number(jsonData.data.userByAuthId.id));
-              console.log(`Known user authenticated - local ID ${jsonData.data.userByAuthId.id}`);
+              const userInDB = jsonData.data.userByAuthId[0];
+              selectUserId(Number(userInDB.id));
+              console.log(`Known user authenticated - local ID ${userInDB.id}`);
             }
           });
     }

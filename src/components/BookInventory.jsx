@@ -27,11 +27,60 @@ function BookInventory(props) {
           });
       setBookInventory(bookList);
     }
-    downloadBooks(props.userId);
+    if (props.userId) {
+      downloadBooks(props.userId);
+    }
   }, [props.userId]);
+
+  function addRandomBook() {
+    fetch('/graphql', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        query: `{ 
+            allBooks {
+              id
+              title
+            }
+          }`}),
+    }).then((data) => data.json())
+        .then((jsonData) => {
+          console.log(JSON.stringify(jsonData));
+          // We will take a random book out of the list and add it to the current user
+          const allbookList = jsonData.data.allBooks;
+          const randomIndex = Math.floor(Math.random()*allbookList.length);
+          const newBookId = allbookList[randomIndex].id;
+          if (bookInventory.map((book) => book.id).includes(newBookId)) {
+            console.warn(`Book already in the inventory!`);
+          } else {
+            // Add the book to the user
+            fetch('/graphql', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                query: `
+                    mutation { 
+                      addToInventory(
+                        userId: ${Number(props.userId)}
+                        bookId: ${Number(newBookId)}
+                        status: "Available") {
+                          userId
+                          bookId
+                      } 
+                  }`}),
+            }).then((data) => data.json()).then((afterInsertData) => {
+              console.log(`After new inventory: ${JSON.stringify(afterInsertData)}`);
+            });
+          }
+        });
+  }
+
   return (
     <div className="panel bookInventory">
-      <p> Book Inventory </p>
+      <div>
+        <p> Book Inventory </p>
+        <button onClick={addRandomBook}> Add A random book (MVP Version) </button>
+      </div>
       { bookInventory.map((book, index) => {
         return (<BookBox key={`book-${book.id}-${index}`} book={book} /> );
       })}
