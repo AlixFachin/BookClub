@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const {ApolloServer, gql} = require('apollo-server-express');
 const path = require('path');
+const axios = require('axios');
 
 const cors = require('cors');
 const morgan = require('morgan');
@@ -110,7 +111,24 @@ const resolvers = {
       return dbUtils.deleteOneBook(args.bookId);
     },
     createUser: async (_, args) => {
-      return dbUtils.createOneUser(args.userData);
+      // Creation of a user -> we need to create the Chat user as well
+      const userData = `{
+        "username": "${args.userData.nickName}",
+        "secret": "${args.userData.authId}"
+      }`;
+      return axios({url: 'https://api.chatengine.io/users/',
+        method: 'POST',
+        headers: {'PRIVATE-KEY': process.env.CHAT_PRIVATE_KEY},
+        data: userData,
+      }).then((response) => {
+        console.log(JSON.stringify(response.data));
+      }).catch((error) => {
+        console.log(`WOOPS~~~~!`);
+        console.log(error);
+      }).then(() => {
+        // DATABASE USER CREATION
+        return dbUtils.createOneUser(args.userData);
+      });
     },
     deleteUser: async (_, args) => {
       return dbUtils.deleteOneUser(args.userId);
