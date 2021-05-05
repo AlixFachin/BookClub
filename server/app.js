@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const {ApolloServer, gql} = require('apollo-server-express');
+const path = require('path');
 
 const cors = require('cors');
 const morgan = require('morgan');
@@ -123,7 +124,7 @@ const resolvers = {
 
 const server = new ApolloServer( {typeDefs, resolvers});
 
-app.use(express.static('build'));
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.use(cors());
 server.applyMiddleware( {app} );
