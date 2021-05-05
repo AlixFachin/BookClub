@@ -9,7 +9,7 @@ import './index.css';
 
 ReactDOM.render(
     <Auth0Provider
-      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      domain='dev-hg2gpjg5.jp.auth0.com'
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
       redirectUri={window.location.origin}
     >
