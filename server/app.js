@@ -123,11 +123,9 @@ const resolvers = {
 
 const server = new ApolloServer( {typeDefs, resolvers});
 
+app.use(express.static('build'));
+
 app.use(cors());
 server.applyMiddleware( {app} );
-
-app.get('/testEndpoint', (req, res) => {
-  res.send({express: 'DOES IT SOUND LIKE A SUCCESS???'});
-});
 
 module.exports = app;
