@@ -5,34 +5,37 @@ import '../styles/BookInventory.css';
 
 function BookInventory(props) {
   const [bookInventory, setBookInventory] = useState([]);
+  async function downloadBooks(userId) {
+    const bookList = await fetch('/graphql', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        query: `{ 
+          bookInventory(userId:${userId}) {
+            id
+            title
+            author
+            genre
+            language
+          }
+        }`}),
+    }).then((data) => data.json())
+        .then((resultObj) => {
+          return resultObj.data.bookInventory;
+        });
+    setBookInventory(bookList);
+  }
   // hook on selected user: populate the book inventory
   useEffect(() => {
-    async function downloadBooks(userId) {
-      const bookList = await fetch('/graphql', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          query: `{ 
-            bookInventory(userId:${userId}) {
-              id
-              title
-              author
-              genre
-              language
-            }
-          }`}),
-      }).then((data) => data.json())
-          .then((resultObj) => {
-            return resultObj.data.bookInventory;
-          });
-      setBookInventory(bookList);
-    }
     if (props.userId) {
       downloadBooks(props.userId);
     }
   }, [props.userId]);
 
   function addRandomBook() {
+    if (!props.userId || props.userId === -1) {
+      return;
+    }
     fetch('/graphql', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -45,7 +48,7 @@ function BookInventory(props) {
           }`}),
     }).then((data) => data.json())
         .then((jsonData) => {
-          console.log(JSON.stringify(jsonData));
+          // console.log(JSON.stringify(jsonData));
           // We will take a random book out of the list and add it to the current user
           const allbookList = jsonData.data.allBooks;
           const randomIndex = Math.floor(Math.random()*allbookList.length);
@@ -69,7 +72,8 @@ function BookInventory(props) {
                       } 
                   }`}),
             }).then((data) => data.json()).then((afterInsertData) => {
-              console.log(`After new inventory: ${JSON.stringify(afterInsertData)}`);
+              // console.log(`After new inventory: ${JSON.stringify(afterInsertData)}`);
+              downloadBooks(props.userId);
             });
           }
         });
