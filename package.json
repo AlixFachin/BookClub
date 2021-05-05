@@ -27,7 +27,7 @@
   },
   "scripts": {
     "hack-client": "react-scripts start",
-    "build-client": "react-scripts build",
+    "build": "react-scripts build",
     "test-client": "react-scripts test",
     "eject": "react-scripts eject",
     "hack-server": "nodemon server",
