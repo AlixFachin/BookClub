@@ -112,18 +112,23 @@ const resolvers = {
     },
     createUser: async (_, args) => {
       // Creation of a user -> we need to create the Chat user as well
-      const userData = `{
-        "username": "${args.userData.nickName}",
-        "secret": "${args.userData.authId}"
-      }`;
-      return axios({url: 'https://api.chatengine.io/users/',
+      const chatUserData = {
+        'username': args.userData.nickName,
+        'secret': args.userData.authId,
+      };
+      // console.log(`Before sending the HTTP POST to the Chat API`);
+      // console.log(`userData: ${JSON.stringify(chatUserData)}`);
+      // console.log(`env: ${process.env.CHAT_PRIVATE_KEY}`);
+      return axios({
         method: 'POST',
+        url: 'https://api.chatengine.io/users/',
         headers: {'PRIVATE-KEY': process.env.CHAT_PRIVATE_KEY},
-        data: userData,
+        data: chatUserData,
       }).then((response) => {
         console.log(JSON.stringify(response.data));
+        return response;
       }).catch((error) => {
-        console.log(`WOOPS~~~~!`);
+        console.log(`WOOPS~~~~! Error in the chat user creation`);
         console.log(error);
       }).then(() => {
         // DATABASE USER CREATION

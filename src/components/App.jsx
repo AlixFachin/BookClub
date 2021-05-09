@@ -11,21 +11,14 @@ import {ChatEngine} from 'react-chat-engine';
 
 function App() {
   const [selectedUserId, selectUserId] = useState(-1);
-
   const {user, isAuthenticated, isLoading} = useAuth0();
 
-  // const result = dotenv.config();
-  // if (result.error) {
-  //   console.log(JSON.stringify(dotenv));
-  //   console.error('Error in the config import');
-  // }
   require('dotenv').config();
-  // console.log(`Environment ${JSON.stringify(process.env)}`);
 
   // useEffect on isAuthenticated changes
   useEffect(()=> {
     if (!isLoading && isAuthenticated) {
-      // Need to check in the DB if things are working
+      // Need to check in the DB if we already have a user with this name
       fetch('/graphql', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -50,6 +43,7 @@ function App() {
                       createUser(userData: {
                       nickName: "${user.nickname}",
                       fullName: "${user.name}",
+                      email:"${user.email}",
                       authId: "${user.sub}"}) {
                       id
                       fullName
