@@ -71,8 +71,8 @@ function App() {
 
   const chatEngineJSX = <ChatEngine
     projectID={process.env.REACT_APP_CHAT_PROJECT_ID}
-    userName={process.env.REACT_APP_CHAT_USER_NAME}
-    userSecret={process.env.REACT_APP_CHAT_USER_PWD}
+    userName={isAuthenticated? user.nickname : process.env.REACT_APP_CHAT_USER_NAME}
+    userSecret={isAuthenticated? user.sub : process.env.REACT_APP_CHAT_USER_PWD}
   />;
 
   return (
