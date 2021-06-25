@@ -103,6 +103,7 @@ describe('GraphQL API Tests', () => {
               id
           }}`,
         });
+    // eslint-disable-next-line no-unused-expressions
     expect(retrieveAfterDeleteResponse.body.data.singleBook).to.be.null;
   });
 });

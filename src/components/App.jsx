@@ -6,8 +6,6 @@ import '../styles/App.css';
 import UserComponent from './UserComponent';
 import BookInventory from './BookInventory';
 import AuthHeader from './authHeader';
-// Chat engine
-import {ChatEngine} from 'react-chat-engine';
 
 function App() {
   const [selectedUserId, selectUserId] = useState(-1);
@@ -69,19 +67,12 @@ function App() {
     }
   }, [isAuthenticated, user, isLoading]);
 
-  const chatEngineJSX = <ChatEngine
-    projectID={process.env.REACT_APP_CHAT_PROJECT_ID}
-    userName={isAuthenticated? user.nickname : process.env.REACT_APP_CHAT_USER_NAME}
-    userSecret={isAuthenticated? user.sub : process.env.REACT_APP_CHAT_USER_PWD}
-  />;
-
   return (
     <div className="App">
       <AuthHeader/>
+      <UserComponent user={user} className="side"/>
       <main>
-        <UserComponent user={user}/>
         <BookInventory userId={selectedUserId} />
-        {isAuthenticated? chatEngineJSX : undefined}
       </main>
     </div>
   );
