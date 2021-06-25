@@ -5,7 +5,7 @@ import '../styles/App.css';
 // Components
 import UserComponent from './UserComponent';
 import BookInventory from './BookInventory';
-import AuthHeader from './authHeader';
+import AppHeader from './appHeader';
 
 function App() {
   const [selectedUserId, selectUserId] = useState(-1);
@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <AuthHeader/>
+      <AppHeader/>
       <UserComponent user={user} className="side"/>
       <main>
         <BookInventory userId={selectedUserId} />

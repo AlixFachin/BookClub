@@ -14,24 +14,16 @@ html {
   display: grid;
   grid-template-areas: 
   "header header header"
-  "side   main   main"
-  " .     main   main"
+  "main   main   side"
+  "main   main   ."
   "footer footer footer";
   grid-template-columns: 150px 1fr 1fr;
   gap: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 3em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  width:100%;
-  grid-area: header;
+main, .side {
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 .authBox {
@@ -61,7 +53,7 @@ main {
   align-items: center;
   margin-top: 15px;
   margin-bottom: 15px;
-  width:100%;
+  /* width:100%; */
 }
 
 .miniPanel {
