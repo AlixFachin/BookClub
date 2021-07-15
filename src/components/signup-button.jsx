@@ -1,8 +1,12 @@
 import React from 'react';
-import {useAuth0} from '@auth0/auth0-react';
+// import {useAuth0} from '@auth0/auth0-react';
 
 const SignupButton = () => {
-  const {loginWithRedirect} = useAuth0();
+  // const {loginWithRedirect} = useAuth0();
+  // TODO AUTH0 -> login redirect function
+  const loginWithRedirect = () => {
+    console.log("Login function not implemented yet... Woops!");
+  }
   return (
     <button className="authButton" onClick={()=> loginWithRedirect({screen_hint: 'signup'})}>
     Sign Up

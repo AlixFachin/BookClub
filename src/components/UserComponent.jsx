@@ -8,10 +8,9 @@ function UserComponent(props) {
       <div className={"userComponent panel" + (props.className ? " " + props.className : "" )}>
         <div className="miniPanel userProfilePanel">
           <p id="profileHeader"> Current user </p>
-          <img className="profileThumb" src={props.user.picture} alt={props.user.nickname} />
-          <p id="profileName">username: {props.user.nickname} </p>
+          <img className="profileThumb" src={props.user.photoURL} alt={props.user.displayName} />
+          <p id="profileName">username: {props.user.displayName} </p>
           <p id="profileEmail">email: {props.user.email}</p>
-          <p id="profileNickname">nickname: {props.user.nickname} </p>
         </div>
       </div>
     );

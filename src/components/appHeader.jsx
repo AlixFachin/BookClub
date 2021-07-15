@@ -1,23 +1,23 @@
 import React from 'react';
-import {useAuth0} from '@auth0/auth0-react';
 import LoginButton from './login-button.jsx';
 import LogoutButton from './logout-button.jsx';
 import '../styles/AppHeader.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function AppHeader(props) {
-  const {isAuthenticated, isLoading} = useAuth0();
+  const [user, isLoading] = useAuthState(props.auth);
 
   function searchLink() {
-    return <li class="nav-link">Search</li>;
+    return <li className="nav-link">Search</li>;
   }
   function userProfileLink() {
     return ( <React.Fragment>
-              <li class="nav-link">Profile</li> 
-              <li class="nav-link"><LogoutButton /> </li> 
+              <li className="nav-link">Profile</li> 
+              <li className="nav-link"><LogoutButton auth={props.auth}/> </li> 
              </React.Fragment>);
   }
   function pleaseLoginLink() {
-    return <li class="nav-link"> <LoginButton /> </li>
+    return <li className="nav-link"> <LoginButton auth={props.auth} firebase={props.firebase}/> </li>
   }
   function inventoryLink() {
     return <li className="nav-link">Inventory</li>;
@@ -37,7 +37,7 @@ function AppHeader(props) {
     inventoryItem = "";
     chatItem = "";
     profileItem = <li className="nav-link"> Loading...</li>;
-  } else if (isAuthenticated) {
+  } else if (user) {
     inventoryItem = inventoryLink();
     chatItem = chatLink();
     profileItem = userProfileLink();
@@ -51,7 +51,7 @@ function AppHeader(props) {
       <ul className="nav-links">
         { searchItem } 
         { inventoryItem }  
-        {chatItem}  
+        { chatItem }  
         { profileItem } 
       </ul>
     </header>);

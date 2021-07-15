@@ -1,10 +1,14 @@
 import React from 'react';
-import {useAuth0} from '@auth0/auth0-react';
 
-const LoginButton = () => {
-  const {loginWithRedirect} = useAuth0();
+const LoginButton = (props) => {
+  const signInWithGoogle = () => {
+    const provider = new props.firebase.auth.GoogleAuthProvider();
+    props.auth.signInWithPopup(provider);
+  }
+
   return (
-    <button className="authButton" onClick={() => loginWithRedirect()}>Log in</button>
+
+    <button className="authButton" onClick={signInWithGoogle}>Log in</button>
   );
 };
 

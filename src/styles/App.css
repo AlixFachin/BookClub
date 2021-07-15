@@ -21,6 +21,25 @@ html {
   gap: 10px;
 }
 
+@media (max-width: 600px) {
+  /* For small screens we don't display the side bar */
+
+  .App {
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+    grid-template-columns: 1fr;
+    gap:5px;
+  }
+
+  .side {
+    visibility: hidden;
+    display: none;
+  }
+
+}
+
 main, .side {
   margin-left: 5vw;
   margin-right: 5vw;
